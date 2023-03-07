@@ -6,6 +6,6 @@ const Section = styled.div`
   scroll-snap-align: center;
 `;
 
-export default function Who() {
+export default function WhoAmI() {
   return <Section>Who</Section>;
 }

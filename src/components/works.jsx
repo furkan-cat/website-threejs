@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import WorksCanvasContainer from "../containers/works-canvas-container";
-import Computer from "./computer";
-import Phone from "./phone";
-import Website from "./website";
+import { Computer, Phone, Website } from "./models/_index";
 
 export default function Works() {
   const [work, setWork] = useState("Mobile Application");
@@ -24,7 +22,7 @@ export default function Works() {
           {
             {
               "Mobile Application": <WorksCanvasContainer render={<Phone />} />,
-              Website: <WorksCanvasContainer render={<Website />} />,
+              "Website": <WorksCanvasContainer render={<Website />} />,
               "Web Application": <WorksCanvasContainer render={<Computer />} />,
             }[work]
           }

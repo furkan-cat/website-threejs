@@ -1,30 +1,37 @@
 import { MeshDistortMaterial, OrbitControls, Sphere } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
+import { useState } from "react";
 import styled from "styled-components";
+import { quotes } from "../constants";
 import Navbar from "./navbar";
 
 export default function Hero() {
+  const [quote, setQuote] = useState(quotes[2]);
+
+  function clickHandler() {
+    let randomQuote = Math.floor(Math.random() * quotes.length);
+    setQuote(quotes[randomQuote]);
+  }
+
   return (
     <Section>
       <Navbar />
       <Container>
         <Left>
-          <Title>Think. Make. Solve.</Title>
+          <Title>Think It! Make It!</Title>
           <WhatWeDo>
             <Line src="./img/line.png" />
-            <Subtitle>What we Do</Subtitle>
+            <Subtitle>Are you still waiting?</Subtitle>
           </WhatWeDo>
-          <Desc>
-            We enjoy creating delightful, human-centered digital experiences.
-          </Desc>
-          <Button>Learn More</Button>
+          <Desc>{quote}</Desc>
+          <Button onClick={clickHandler}>Give Me More Quotes</Button>
         </Left>
         <Right>
           <Canvas>
             <OrbitControls enableZoom={false} />
             <ambientLight intensity={1} />
             <directionalLight position={[3, 2, 1]} />
-            <Sphere args={[1, 100, 200]} scale={1.5}>
+            <Sphere args={[1, 100, 200]} scale={1.65}>
               <MeshDistortMaterial color="#3d1c56" distort={0.5} speed={1.75} />
             </Sphere>
           </Canvas>
@@ -37,11 +44,12 @@ export default function Hero() {
 
 const Section = styled.div`
   height: 100vh;
-  scroll-snap-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  scroll-snap-align: center;
+
   @media only screen and (max-width: 768px) {
     height: 200vh;
   }
@@ -49,10 +57,10 @@ const Section = styled.div`
 
 const Container = styled.div`
   height: 100%;
-  scroll-snap-align: center;
   width: 1400px;
   display: flex;
   justify-content: space-between;
+
   @media only screen and (max-width: 768px) {
     width: 100%;
     flex-direction: column;
@@ -66,7 +74,8 @@ const Left = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 20px;
+  gap: 30px;
+
   @media only screen and (max-width: 768px) {
     flex: 1;
     align-items: center;
@@ -75,6 +84,8 @@ const Left = styled.div`
 
 const Title = styled.h1`
   font-size: 74px;
+  white-space: nowrap;
+
   @media only screen and (max-width: 768px) {
     text-align: center;
   }
@@ -83,7 +94,7 @@ const Title = styled.h1`
 const WhatWeDo = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 `;
 
 const Line = styled.img`
@@ -91,12 +102,24 @@ const Line = styled.img`
 `;
 
 const Subtitle = styled.h2`
-  color: #da4ea2;
+  font-size: 26px;
+  font-weight: 400;
+  opacity: 1;
+  color: #da4ea2dd;
+  animation: opacity 1s infinite ease alternate;
+
+  @keyframes opacity {
+    to {
+      opacity: 0.75;
+      color: #dc64acdd;
+    }
+  }
 `;
 
 const Desc = styled.p`
   font-size: 24px;
   color: lightgray;
+
   @media only screen and (max-width: 768px) {
     padding: 20px;
     text-align: center;
@@ -106,17 +129,23 @@ const Desc = styled.p`
 const Button = styled.button`
   background-color: #da4ea2;
   color: white;
-  font-weight: 500;
-  width: 100px;
-  padding: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  width: max-content;
+  padding: 15px 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  &:hover {
+    color: #231f22c2;
+  }
 `;
 
 const Right = styled.div`
   flex: 3;
   position: relative;
+
   @media only screen and (max-width: 768px) {
     flex: 1;
     width: 100%;
@@ -134,6 +163,7 @@ const Img = styled.img`
   right: 0;
   margin: auto;
   animation: animate 2s infinite ease alternate;
+
   @media only screen and (max-width: 768px) {
     width: 300px;
     height: 300px;
