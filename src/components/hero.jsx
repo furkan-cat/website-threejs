@@ -1,12 +1,14 @@
-import { MeshDistortMaterial, OrbitControls, Sphere } from "@react-three/drei";
-import { Canvas } from "@react-three/fiber";
-import { useState } from "react";
 import styled from "styled-components";
-import { quotes } from "../constants";
+import { useState } from "react";
+import { Canvas } from "@react-three/fiber";
+import { MeshDistortMaterial, OrbitControls, Sphere } from "@react-three/drei";
+import UseWindowSize from "../utils/hooks/useWindowSize";
+import { quotes } from "../utils/constants";
 import Navbar from "./navbar";
 
 export default function Hero() {
   const [quote, setQuote] = useState(quotes[2]);
+  const size = UseWindowSize();
 
   function clickHandler() {
     let randomQuote = Math.floor(Math.random() * quotes.length);
@@ -31,7 +33,7 @@ export default function Hero() {
             <OrbitControls enableZoom={false} />
             <ambientLight intensity={1} />
             <directionalLight position={[3, 2, 1]} />
-            <Sphere args={[1, 100, 200]} scale={1.65}>
+            <Sphere args={[1, 100, 200]} scale={size >= 1400 ? 1.65 : 1.25}>
               <MeshDistortMaterial color="#3d1c56" distort={0.5} speed={1.75} />
             </Sphere>
           </Canvas>
@@ -43,6 +45,7 @@ export default function Hero() {
 }
 
 const Section = styled.div`
+  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -51,40 +54,42 @@ const Section = styled.div`
   scroll-snap-align: center;
 
   @media only screen and (max-width: 768px) {
-    height: 200vh;
+    justify-content: unset;
+    padding: 0 20px;
   }
 `;
 
 const Container = styled.div`
   height: 100%;
-  width: 1400px;
   display: flex;
   justify-content: space-between;
+  padding: 0 50px;
 
   @media only screen and (max-width: 768px) {
     width: 100%;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
+    padding: 0 10px;
   }
 `;
 
 const Left = styled.div`
-  flex: 2;
+  flex: 0 1 auto;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 30px;
 
   @media only screen and (max-width: 768px) {
-    flex: 1;
     align-items: center;
   }
 `;
 
 const Title = styled.h1`
   font-size: 74px;
-  white-space: nowrap;
+  white-space: wrap;
 
   @media only screen and (max-width: 768px) {
     text-align: center;
@@ -119,6 +124,7 @@ const Subtitle = styled.h2`
 const Desc = styled.p`
   font-size: 24px;
   color: lightgray;
+  text-align: center;
 
   @media only screen and (max-width: 768px) {
     padding: 20px;
@@ -143,18 +149,18 @@ const Button = styled.button`
 `;
 
 const Right = styled.div`
-  flex: 3;
+  flex: 0 1 auto;
+  width: 100%;
   position: relative;
 
   @media only screen and (max-width: 768px) {
-    flex: 1;
     width: 100%;
   }
 `;
 
 const Img = styled.img`
-  width: 800px;
-  height: 600px;
+  width: 700px;
+  height: 500px;
   object-fit: contain;
   position: absolute;
   top: 0;
@@ -162,11 +168,21 @@ const Img = styled.img`
   left: 0;
   right: 0;
   margin: auto;
+  transform: translate(-6%, 0);
   animation: animate 2s infinite ease alternate;
 
-  @media only screen and (max-width: 768px) {
-    width: 300px;
+  @media only screen and (max-width: 1400px) {
+    width: 600px;
+    height: 500px;
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 500px;
+    height: 400px;
+  }
+  @media only screen and (max-width: 425px) {
+    /* width: 400px;
     height: 300px;
+    margin: unset; */
   }
   @keyframes animate {
     to {

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { navbarLinks } from "../constants";
+import { navbarLinks } from "../utils/constants";
 
 export default function Navbar() {
   return (
@@ -13,24 +13,23 @@ export default function Navbar() {
             ))}
           </List>
         </Links>
-        <Icons>
-          <Icon src="./img/search.png" />
-          <Button>Hire Now</Button>
-        </Icons>
       </Container>
     </Section>
   );
 }
 
 const Section = styled.div`
-  display: flex;
-  justify-content: center;
+  max-width: 1400px;
+
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+  }
 `;
 
 const Container = styled.div`
-  width: 1400px;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   padding: 10px 0;
 `;
@@ -40,15 +39,24 @@ const Links = styled.div`
   align-items: center;
   gap: 50px;
   list-style: none;
+
+  @media only screen and (max-width: 768px) {
+    gap: 25px;
+  }
 `;
 
 const Logo = styled.img`
   background-color: #cabcca;
   border-radius: 50%;
-  width: 38px;
-  height: 38px;
-  opacity: 0.8;
+  width: 34px;
+  height: 34px;
+  opacity: 0.7;
   transition: all 0.3s;
+
+  @media only screen and (max-width: 768px) {
+    width: 26px;
+    height: 26px;
+  }
 
   &:hover {
     opacity: 1;
@@ -59,6 +67,14 @@ const List = styled.ul`
   display: flex;
   gap: 70px;
   list-style: none;
+
+  @media only screen and (max-width: 1024px) {
+    gap: 30px;
+  }
+
+  @media only screen and (max-width: 768px) {
+    gap: 25px;
+  }
 `;
 
 const ListItem = styled.li`
@@ -75,6 +91,16 @@ const ListItem = styled.li`
   position: relative;
   transition: color 0.2s ease-in;
 
+  @media only screen and (max-width: 768px) {
+    font-size: 16px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    width: max-content;
+  }
+
+  &:hover {
+    color: #ffffffe8;
+  }
   &::before {
     content: "";
     position: absolute;
@@ -84,33 +110,17 @@ const ListItem = styled.li`
     transform: translate(-50%, -25%);
     border-bottom: 4px solid #663678a4;
     transition: all 0.3s ease;
-  }
 
-  &:hover {
-    color: #ffffffe8;
+    @media only screen and (max-width: 768px) {
+      width: 60px;
+    }
   }
-
   &:hover::before {
     border-bottom-color: #834a97cf;
     width: 40px;
+
+    @media only screen and (max-width: 768px) {
+      width: 30px;
+    }
   }
-`;
-
-const Icons = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 50px;
-`;
-
-const Icon = styled.img`
-  width: 20px;
-  cursor: pointer;
-`;
-const Button = styled.button`
-  width: 100px;
-  padding: 10px;
-  background-color: #da4ea2;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
 `;

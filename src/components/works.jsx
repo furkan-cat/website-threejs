@@ -1,17 +1,21 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { motion, useInView } from "framer-motion";
 import styled from "styled-components";
+import { skills } from "../utils/constants";
 import WorksCanvasContainer from "../containers/works-canvas-container";
-import { Computer, Phone, Website } from "./models/_index";
+import { Computer, Phone, Website } from "./canvas/_index";
 
 export default function Works() {
   const [work, setWork] = useState("Mobile Application");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { amount: 0.4 });
 
   return (
     <Section>
-      <Container>
+      <Container ref={ref} isInView={isInView}>
         <Left>
           <List>
-            {data.map((item) => (
+            {skills.map((item) => (
               <ListItem key={item} text={item} onClick={() => setWork(item)}>
                 {item}
               </ListItem>
@@ -22,7 +26,7 @@ export default function Works() {
           {
             {
               "Mobile Application": <WorksCanvasContainer render={<Phone />} />,
-              "Website": <WorksCanvasContainer render={<Website />} />,
+              Website: <WorksCanvasContainer render={<Website />} />,
               "Web Application": <WorksCanvasContainer render={<Computer />} />,
             }[work]
           }
@@ -31,8 +35,6 @@ export default function Works() {
     </Section>
   );
 }
-
-const data = ["Mobile Application", "Web Application", "Website"];
 
 const Section = styled.div`
   height: 100vh;
@@ -45,10 +47,13 @@ const Section = styled.div`
   font-weight: 300;
 `;
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   width: 1400px;
   display: flex;
   justify-content: space-between;
+  transform: ${(props) => (props.isInView ? "none" : "translateX(-200px)")};
+  opacity: ${(props) => (props.isInView ? 1 : 0)};
+  transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s;
 
   @media only screen and (max-width: 768px) {
     width: 100%;
