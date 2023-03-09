@@ -15,25 +15,28 @@ const WhoAmI = (props, ref) => {
 
   return (
     <Section ref={ref}>
-      <VerticalTimeline ref={isInViewRef}>
-        {experiences.map((item) => {
-          const icon = item.icon === "work" ? <WorkIcon /> : <EducationIcon />;
-          return (
-            <VerticalTimelineElement
-              key={item.id}
-              className="vertical-timeline-element--education"
-              date={item.date}
-              iconStyle={item.iconStyle}
-              icon={icon}
-              intersectionObserverProps={{ isInView }}
-            >
-              <H3>{item.title}</H3>
-              <H4>{item.subtitle}</H4>
-              <P>{item.desc}</P>
-            </VerticalTimelineElement>
-          );
-        })}
-      </VerticalTimeline>
+      <div ref={isInViewRef}>
+        <VerticalTimeline>
+          {experiences.map((item) => {
+            const icon =
+              item.icon === "work" ? <WorkIcon /> : <EducationIcon />;
+            return (
+              <VerticalTimelineElement
+                key={item.id}
+                className="vertical-timeline-element--education"
+                date={item.date}
+                iconStyle={item.iconStyle}
+                icon={icon}
+                intersectionObserverProps={{ isInView }}
+              >
+                <H3>{item.title}</H3>
+                <H4>{item.subtitle}</H4>
+                <P>{item.desc}</P>
+              </VerticalTimelineElement>
+            );
+          })}
+        </VerticalTimeline>
+      </div>
     </Section>
   );
 };
@@ -41,7 +44,6 @@ const WhoAmI = (props, ref) => {
 export default forwardRef(WhoAmI);
 
 const Section = styled.div`
-  /* height: 100vh; */
   /* scroll-snap-align: center; */
 `;
 

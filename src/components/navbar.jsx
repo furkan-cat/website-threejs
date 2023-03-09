@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export default function Navbar(props) {
   const { setStates } = props;
+  const { setScrollToWhoAmI, setScrollToWorks, setScrollToContact } = setStates;
 
   return (
     <Section>
@@ -9,14 +10,11 @@ export default function Navbar(props) {
         <Links>
           <Logo src="./img/logo.png"></Logo>
           <List>
-            <ListItem onClick={() => set(true)}>Who</ListItem>
-            <ListItem onClick={() => setStates.setScrollToWhoAmI(true)}>
+            <ListItem onClick={() => setScrollToWhoAmI(true)}>
               Who am I?
             </ListItem>
-            <ListItem onClick={() => setStates.setScrollToWorks(true)}>
-              Works
-            </ListItem>
-            <ListItem onClick={() => setStates.setScrollToContact(true)}>
+            <ListItem onClick={() => setScrollToWorks(true)}>Works</ListItem>
+            <ListItem onClick={() => setScrollToContact(true)}>
               Contact
             </ListItem>
           </List>

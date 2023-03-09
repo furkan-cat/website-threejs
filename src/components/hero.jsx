@@ -15,7 +15,7 @@ export default function Hero(props) {
     setQuote(quotes[randomQuote]);
   }
 
-  const device = size > 425 ? 1.45 : size > 1440 ? 1.75 : 1;
+  const device = size > 425 ? 1.45 : size > 1440 ? 1.75 : 1.3;
 
   return (
     <Section>
@@ -73,6 +73,9 @@ const Container = styled.div`
     flex-direction: column-reverse;
     padding: 20px;
   }
+  /* @media only screen and (max-width: 425px) {
+    top: 50%;
+  } */
 `;
 
 const Left = styled.div`
@@ -104,8 +107,10 @@ const Title = styled.h1`
   white-space: wrap;
 
   @media only screen and (max-width: 768px) {
-    font-size: 48px;
-    /* text-align: center; */
+    font-size: 42px;
+  }
+  @media only screen and (max-width: 425px) {
+    font-size: 32px;
   }
 `;
 
@@ -117,6 +122,10 @@ const WhatWeDo = styled.div`
 
 const Line = styled.img`
   height: 5px;
+
+  @media only screen and (max-width: 425px) {
+    height: 3px;
+  }
 `;
 
 const Subtitle = styled.h2`
@@ -128,6 +137,9 @@ const Subtitle = styled.h2`
 
   @media only screen and (max-width: 768px) {
     font-size: 22px;
+  }
+  @media only screen and (max-width: 425px) {
+    font-size: 18px;
   }
 
   @keyframes opacity {
@@ -147,6 +159,9 @@ const Desc = styled.p`
     padding: 20px;
     text-align: center;
   }
+  @media only screen and (max-width: 425px) {
+    font-size: 16px;
+  }
 `;
 
 const Button = styled.button`
@@ -159,6 +174,10 @@ const Button = styled.button`
   border: none;
   border-radius: 5px;
   cursor: pointer;
+
+  @media only screen and (max-width: 425px) {
+    font-size: 15px;
+  }
 
   &:hover {
     color: #231f22c2;
@@ -194,15 +213,17 @@ const Img = styled.img`
   }
   @media only screen and (max-width: 1024px) {
     width: 450px;
-    height: 375px;
+    height: 350px;
+    left: -7.5%;
   }
   @media only screen and (max-width: 768px) {
     width: 400px;
     height: 325px;
   }
   @media only screen and (max-width: 425px) {
-    width: 300px;
-    height: 250px;
+    width: 250px;
+    height: 200px;
+    top: 7.5%;
   }
 
   @keyframes animate {
