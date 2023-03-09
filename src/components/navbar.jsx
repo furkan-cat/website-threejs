@@ -1,10 +1,7 @@
-import { forwardRef } from "react";
 import styled from "styled-components";
-import { navbarLinks } from "../utils/constants";
-import useScrollIntoView from "../utils/hooks/useScrollIntoView";
 
-const Navbar = () => {
-  const [scrollToRef, setScrollTo] = useScrollIntoView();
+export default function Navbar(props) {
+  const { setStates } = props;
 
   return (
     <Section>
@@ -12,19 +9,22 @@ const Navbar = () => {
         <Links>
           <Logo src="./img/logo.png"></Logo>
           <List>
-            {navbarLinks.map((item) => (
-              <ListItem key={item} onClick={() => setScrollTo(true)}>
-                {item}
-              </ListItem>
-            ))}
+            <ListItem onClick={() => set(true)}>Who</ListItem>
+            <ListItem onClick={() => setStates.setScrollToWhoAmI(true)}>
+              Who am I?
+            </ListItem>
+            <ListItem onClick={() => setStates.setScrollToWorks(true)}>
+              Works
+            </ListItem>
+            <ListItem onClick={() => setStates.setScrollToContact(true)}>
+              Contact
+            </ListItem>
           </List>
         </Links>
       </Container>
     </Section>
   );
-};
-
-export default forwardRef(Navbar);
+}
 
 const Section = styled.div`
   max-width: 1400px;

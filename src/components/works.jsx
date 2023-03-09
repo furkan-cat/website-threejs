@@ -1,18 +1,18 @@
-import { useRef, useState } from "react";
+import { forwardRef, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import styled from "styled-components";
 import { skills } from "../utils/constants";
 import WorksCanvasContainer from "../containers/works-canvas-container";
 import { Computer, Phone, Website } from "./canvas/_index";
 
-export default function Works() {
+const Works = (props, ref) => {
   const [work, setWork] = useState("Mobile Application");
-  const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.4 });
+  const isInViewRef = useRef(null);
+  const isInView = useInView(isInViewRef, { amount: 0.4 });
 
   return (
-    <Section>
-      <Container ref={ref} isInView={isInView}>
+    <Section ref={ref}>
+      <Container ref={isInViewRef} isInView={isInView}>
         <Left>
           <List>
             {skills.map((item) => (
@@ -34,7 +34,9 @@ export default function Works() {
       </Container>
     </Section>
   );
-}
+};
+
+export default forwardRef(Works);
 
 const Section = styled.div`
   height: 100vh;

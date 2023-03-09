@@ -2,11 +2,9 @@ import React, { useRef, useState, forwardRef } from "react";
 import styled from "styled-components";
 import emailjs from "@emailjs/browser";
 
-const Contact = (props, scrollToRef ) => {
-  const ref = useRef();
-  console.log(scrollToRef);
+const Contact = (props, ref) => {
+  const formRef = useRef();
   const [success, setSuccess] = useState(null);
-  const [scrollToRef, setScrollTo] = useScrollIntoView();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,9 +29,9 @@ const Contact = (props, scrollToRef ) => {
   };
 
   return (
-    <Section ref={scrollToRef}>
+    <Section ref={ref}>
       <Container>
-        <Form ref={ref} onSubmit={handleSubmit}>
+        <Form ref={formRef} onSubmit={handleSubmit}>
           <Title>Contact Us</Title>
           <Input placeholder="Name" name="name" />
           <Input placeholder="Email" name="email" />

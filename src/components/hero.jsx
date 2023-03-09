@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useState } from "react";
 import styled from "styled-components";
 import { Canvas } from "@react-three/fiber";
 import { MeshDistortMaterial, OrbitControls, Sphere } from "@react-three/drei";
@@ -6,7 +6,7 @@ import UseWindowSize from "../utils/hooks/useWindowSize";
 import { quotes } from "../utils/constants";
 import Navbar from "./navbar";
 
-export default function Hero() {
+export default function Hero(props) {
   const [quote, setQuote] = useState(quotes[2]);
   const size = UseWindowSize();
 
@@ -19,7 +19,7 @@ export default function Hero() {
 
   return (
     <Section>
-      <Navbar />
+      <Navbar {...props} />
       <Container>
         <Left>
           <Title>Think It! Make It!</Title>

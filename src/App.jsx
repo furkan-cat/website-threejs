@@ -1,13 +1,19 @@
 import styled from "styled-components";
 import { Contact, Hero, WhoAmI, Works } from "./components/_index";
+import useScrollIntoView from "./utils/hooks/useScrollIntoView";
 
 export default function App() {
+  const [scrollToWhoAmI, setScrollToWhoAmI] = useScrollIntoView();
+  const [scrollToWorks, setScrollToWorks] = useScrollIntoView();
+  const [scrollToContact, setScrollToContact] = useScrollIntoView();
   return (
     <Container>
-      <Hero />
-      <WhoAmI />
-      <Works />
-      <Contact />
+      <Hero
+        setStates={{ setScrollToWhoAmI, setScrollToWorks, setScrollToContact }}
+      />
+      <WhoAmI ref={scrollToWhoAmI} />
+      <Works ref={scrollToWorks} />
+      <Contact ref={scrollToContact} />
     </Container>
   );
 }
@@ -21,7 +27,7 @@ const Container = styled.div`
   scrollbar-width: none;
   color: #fff;
   background: url("./img/bg.jpeg");
-  
+
   &::-webkit-scrollbar {
     display: none;
   }

@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { forwardRef, useRef } from "react";
 import styled from "styled-components";
 import { useInView } from "framer-motion";
 import {
@@ -9,13 +9,13 @@ import "react-vertical-timeline-component/style.min.css";
 import { WorkIcon, EducationIcon } from "../assets/icons/_index";
 import { experiences } from "../utils/constants";
 
-export default function WhoAmI() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { amount: 0.4 });
+const WhoAmI = (props, ref) => {
+  const isInViewRef = useRef(null);
+  const isInView = useInView(isInViewRef, { amount: 0.4 });
 
   return (
     <Section ref={ref}>
-      <VerticalTimeline>
+      <VerticalTimeline ref={isInViewRef}>
         {experiences.map((item) => {
           const icon = item.icon === "work" ? <WorkIcon /> : <EducationIcon />;
           return (
@@ -36,7 +36,9 @@ export default function WhoAmI() {
       </VerticalTimeline>
     </Section>
   );
-}
+};
+
+export default forwardRef(WhoAmI);
 
 const Section = styled.div`
   /* height: 100vh; */
