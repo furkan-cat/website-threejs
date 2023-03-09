@@ -1,5 +1,5 @@
-import styled from "styled-components";
 import { useState } from "react";
+import styled from "styled-components";
 import { Canvas } from "@react-three/fiber";
 import { MeshDistortMaterial, OrbitControls, Sphere } from "@react-three/drei";
 import UseWindowSize from "../utils/hooks/useWindowSize";
@@ -14,6 +14,8 @@ export default function Hero() {
     let randomQuote = Math.floor(Math.random() * quotes.length);
     setQuote(quotes[randomQuote]);
   }
+
+  const device = size > 425 ? 1.45 : size > 1440 ? 1.75 : 1;
 
   return (
     <Section>
@@ -33,8 +35,8 @@ export default function Hero() {
             <OrbitControls enableZoom={false} />
             <ambientLight intensity={1} />
             <directionalLight position={[3, 2, 1]} />
-            <Sphere args={[1, 100, 200]} scale={size >= 1400 ? 1.65 : 1.25}>
-              <MeshDistortMaterial color="#3d1c56" distort={0.5} speed={1.75} />
+            <Sphere args={[1, 100, 200]} scale={device}>
+              <MeshDistortMaterial color="#3d1c56" distort={0.6} speed={1.5} />
             </Sphere>
           </Canvas>
           <Img src="./img/moon.png" />
@@ -45,13 +47,11 @@ export default function Hero() {
 }
 
 const Section = styled.div`
-  width: 100%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  scroll-snap-align: center;
+  position: relative;
 
   @media only screen and (max-width: 768px) {
     justify-content: unset;
@@ -60,17 +60,18 @@ const Section = styled.div`
 `;
 
 const Container = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
-  justify-content: space-between;
-  padding: 0 50px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
   @media only screen and (max-width: 768px) {
-    width: 100%;
+    top: 45%;
     flex-direction: column-reverse;
-    align-items: center;
-    justify-content: space-evenly;
-    padding: 0 10px;
+    padding: 20px;
   }
 `;
 
@@ -81,9 +82,20 @@ const Left = styled.div`
   flex-direction: column;
   justify-content: center;
   gap: 30px;
+  padding-left: 200px;
+
+  @media only screen and (max-width: 1440px) {
+    padding-left: 125px;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    padding-left: 85px;
+  }
 
   @media only screen and (max-width: 768px) {
+    gap: 5px;
     align-items: center;
+    padding-left: unset;
   }
 `;
 
@@ -92,7 +104,8 @@ const Title = styled.h1`
   white-space: wrap;
 
   @media only screen and (max-width: 768px) {
-    text-align: center;
+    font-size: 48px;
+    /* text-align: center; */
   }
 `;
 
@@ -113,6 +126,10 @@ const Subtitle = styled.h2`
   color: #da4ea2dd;
   animation: opacity 1s infinite ease alternate;
 
+  @media only screen and (max-width: 768px) {
+    font-size: 22px;
+  }
+
   @keyframes opacity {
     to {
       opacity: 0.75;
@@ -124,9 +141,9 @@ const Subtitle = styled.h2`
 const Desc = styled.p`
   font-size: 24px;
   color: lightgray;
-  text-align: center;
 
   @media only screen and (max-width: 768px) {
+    font-size: 20px;
     padding: 20px;
     text-align: center;
   }
@@ -151,16 +168,17 @@ const Button = styled.button`
 const Right = styled.div`
   flex: 0 1 auto;
   width: 100%;
+  height: 100%;
   position: relative;
 
   @media only screen and (max-width: 768px) {
-    width: 100%;
+    flex: 0 1 1;
   }
 `;
 
 const Img = styled.img`
-  width: 700px;
-  height: 500px;
+  width: 600px;
+  height: 425px;
   object-fit: contain;
   position: absolute;
   top: 0;
@@ -168,25 +186,28 @@ const Img = styled.img`
   left: 0;
   right: 0;
   margin: auto;
-  transform: translate(-6%, 0);
   animation: animate 2s infinite ease alternate;
 
   @media only screen and (max-width: 1400px) {
-    width: 600px;
-    height: 500px;
+    width: 550px;
+    height: 480px;
   }
   @media only screen and (max-width: 1024px) {
-    width: 500px;
-    height: 400px;
+    width: 450px;
+    height: 375px;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 400px;
+    height: 325px;
   }
   @media only screen and (max-width: 425px) {
-    /* width: 400px;
-    height: 300px;
-    margin: unset; */
+    width: 300px;
+    height: 250px;
   }
+
   @keyframes animate {
     to {
-      transform: translateY(20px);
+      transform: translate(20px, 10px);
     }
   }
 `;

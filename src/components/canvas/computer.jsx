@@ -6,7 +6,7 @@ export default function Computer(props) {
   return (
     <group {...props} dispose={null}>
       <group>
-        <group rotation={[0, 4.7, 0]}>
+        <group rotation={[0, 4.6, 0]}>
           <mesh
             geometry={nodes.defaultMaterial.geometry}
             material={materials.Part2}

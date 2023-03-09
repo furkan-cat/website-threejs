@@ -38,7 +38,7 @@ export default function Works() {
 
 const Section = styled.div`
   height: 100vh;
-  scroll-snap-align: center;
+  /* scroll-snap-align: center; */
   display: flex;
   justify-content: center;
   position: relative;
@@ -48,9 +48,8 @@ const Section = styled.div`
 `;
 
 const Container = styled(motion.div)`
-  width: 1400px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   transform: ${(props) => (props.isInView ? "none" : "translateX(-200px)")};
   opacity: ${(props) => (props.isInView ? 1 : 0)};
   transition: all 0.9s cubic-bezier(0.17, 0.55, 0.55, 1) 0.3s;
@@ -58,16 +57,17 @@ const Container = styled(motion.div)`
   @media only screen and (max-width: 768px) {
     width: 100%;
     flex-direction: column;
+    justify-content: space-evenly;
   }
 `;
 
 const Left = styled.div`
-  flex: 2;
   display: flex;
   align-items: center;
+  flex: 0 1 auto;
 
   @media only screen and (max-width: 768px) {
-    padding: 20px;
+    padding: 20px 0;
     justify-content: center;
   }
 `;
@@ -80,7 +80,7 @@ const List = styled.ul`
 `;
 
 const ListItem = styled.li`
-  font-size: 75px;
+  font-size: 52px;
   cursor: pointer;
   color: #7954f2;
   position: relative;
@@ -117,5 +117,9 @@ const ListItem = styled.li`
 `;
 
 const Right = styled.div`
-  flex: 1;
+  flex: 0 1 auto;
+
+  @media only screen and (max-width: 768px) {
+    height: 350px;
+  }
 `;

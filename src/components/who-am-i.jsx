@@ -39,8 +39,8 @@ export default function WhoAmI() {
 }
 
 const Section = styled.div`
-  height: 100vh;
-  scroll-snap-align: center;
+  /* height: 100vh; */
+  /* scroll-snap-align: center; */
 `;
 
 const H3 = styled.h3`

@@ -5,9 +5,9 @@ export default function Website(props) {
   const group = useRef();
   const { nodes, materials, animations } = useGLTF("/website-transformed.glb");
   const { actions } = useAnimations(animations, group);
-  
+
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props}>
       <group name="Sketchfab_Scene">
         <group name="Sketchfab_model" rotation={[0, 4, 0]}>
           <group
