@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import styled from "styled-components";
 import { skills } from "../utils/constants";
 import WorksCanvasContainer from "../containers/works-canvas-container";
-import { Computer, Phone, Website } from "./canvas/_index";
+import { Computer, Phone, Website } from "../canvas/_index";
 
 const Works = (props, ref) => {
   const [work, setWork] = useState("Mobile Application");
